@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const { TodoModel } = require("./db.js");
+const cors = require("cors");
+
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 
@@ -65,10 +68,15 @@ app.put("/todo", async function(req, res){
     }
 })
 
+app.get("/todo", async function(req, res){
+    const todos = await TodoModel.find({});
+    res.json(todos);    
+})
+
 
 async function main(){
     mongoose.connect("mongodb+srv://Bhumit_05:FKTq5Z4sBA2sT0SE@cluster0.tnup1.mongodb.net/Todo-Fullstack");
-    app.listen(3000);
+    app.listen(4000);
 }
 
 main();
