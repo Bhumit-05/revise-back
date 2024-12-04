@@ -1,30 +1,43 @@
-import React, { useState, useEffect } from "react";
-import api from "./api";
+import { useEffect } from "react";
+import AddTodo from "./AddTodo";
 import TodoCard from "./todoCard";
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo } from "./todoSlice";
 
 const App = () => {
   
-  const [todos, setTodos] = useState([]);
+  const dispatch = useDispatch();
+  
+  const todos = useSelector(store => store.todo.todos);
 
-  async function getTodos(){
-    try{
-      const res = await api.get("/todo");
-      setTodos(res.data);
-    }
-    catch(e){
+  const fetchTodo = async () => {
+    const res = await fetch("http://localhost:4000/todo");
+    const data = await res.json();
 
-    }
-  }
+    dispatch(addTodo(data));
+  };
 
   useEffect(() => {
-    getTodos();
+    fetchTodo();
   }, [])
 
   console.log(todos);
 
   return(
-    <div>
-      <TodoCard/>
+    <div className="mx-auto max-w-fit">
+      <div className=" mt-[50px] text-5xl mx-auto max-w-fit font-serif">
+        TODOS
+      </div>
+      <div className="bg-gray-200 rounded-xl mix-blend-multiply ">
+        <AddTodo/>
+      </div>
+      <div>
+        {todos && todos.length > 0 ? (
+          todos.map(todo => <TodoCard key={todo._id} todo={todo} />)
+        ) : (
+          <p>No todos found.</p>
+        )}
+      </div>
     </div>
   );
 };

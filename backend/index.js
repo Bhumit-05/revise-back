@@ -75,7 +75,7 @@ app.get("/todo", async function(req, res){
 
 
 async function main(){
-    mongoose.connect("mongodb+srv://Bhumit_05:FKTq5Z4sBA2sT0SE@cluster0.tnup1.mongodb.net/Todo-Fullstack");
+    mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
     app.listen(4000);
 }
 
