@@ -74,6 +74,11 @@ app.get("/todo", async function(req, res){
 })
 
 
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 async function main(){
     mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
     app.listen(4000);
