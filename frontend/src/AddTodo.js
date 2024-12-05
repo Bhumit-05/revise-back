@@ -7,7 +7,7 @@ const AddTodo = () => {
     const dispatch = useDispatch();
 
     const fetchTodo = async () => {
-        const res = await fetch("http://localhost:4000/todo");
+        const res = await fetch("https://revise-back.onrender.com");
         const data = await res.json();
     
         dispatch(addTodo(data));
@@ -21,7 +21,7 @@ const AddTodo = () => {
         const addTitle = title.current.value;
         const addDuration = duration.current.value;
 
-        await fetch("http://localhost:4000/todo",{
+        await fetch("https://revise-back.onrender.com",{
             method : "POST",
             headers : {
                 "Content-Type" : "application/json",

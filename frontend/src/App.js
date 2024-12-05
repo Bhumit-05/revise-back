@@ -11,7 +11,7 @@ const App = () => {
   const todos = useSelector(store => store.todo.todos);
 
   const fetchTodo = async () => {
-    const res = await fetch("http://localhost:4000/todo");
+    const res = await fetch("https://revise-back.onrender.com");
     const data = await res.json();
 
     dispatch(addTodo(data));
