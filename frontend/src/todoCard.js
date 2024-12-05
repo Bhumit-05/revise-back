@@ -8,14 +8,14 @@ const TodoCard = (todo) => {
   const dispatch = useDispatch();
 
   const fetchTodo = async () => {
-    const res = await fetch("https://revise-back.onrender.com");
+    const res = await fetch("https://revise-back.onrender.com/todo");
     const data = await res.json();
 
     dispatch(addTodo(data));
   };
 
   async function handleRemove(){
-    await fetch("https://revise-back.onrender.com",{
+    await fetch("https://revise-back.onrender.com/todo",{
       method : "DELETE",
       headers: {
         "Content-Type": "application/json", 

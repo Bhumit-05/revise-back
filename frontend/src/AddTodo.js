@@ -21,7 +21,7 @@ const AddTodo = () => {
         const addTitle = title.current.value;
         const addDuration = duration.current.value;
 
-        await fetch("https://revise-back.onrender.com",{
+        await fetch("https://revise-back.onrender.com/todo",{
             method : "POST",
             headers : {
                 "Content-Type" : "application/json",
